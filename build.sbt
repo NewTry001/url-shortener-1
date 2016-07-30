@@ -7,7 +7,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
-  jdbc,
   cache,
   ws,
   "com.typesafe.play" %% "play-slick" % "2.0.0",
@@ -17,3 +16,5 @@ libraryDependencies ++= Seq(
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+
+routesGenerator := InjectedRoutesGenerator

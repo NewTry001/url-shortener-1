@@ -1,6 +1,6 @@
 package models
 
-import persistance.EShortUrl
+import persistance.dao.EShortUrl
 
 /**
   * Created by Haoji on 2016-07-24.
@@ -9,9 +9,15 @@ import persistance.EShortUrl
   * The ShortUrl Model
   * @param entity shortened hash entity
   */
-class ShortUrl(entity: EShortUrl) {
+case class ShortUrl(entity: EShortUrl) {
   def hash: Hash = Hash(entity.hash)
   def url: Url = Url(entity.url)
+}
+
+object ShortUrl {
+  def apply(hash: Hash, url: Url): ShortUrl = {
+    ShortUrl(EShortUrl(hash.hash, url.url))
+  }
 }
 
 case class Hash(hash: String)
