@@ -34,7 +34,7 @@ class ShortUrlDAO @Inject() (dbConfigProvider: DatabaseConfigProvider) extends H
   private val logger = Logger(this.getClass)
 
   def insert(shortUrl: EShortUrl)(implicit ex: ExecutionContext): Future[EShortUrl] = {
-    Logger.info(s"ShortUrl insert starts for hash=${shortUrl.hash} and url=${shortUrl.url}")
+    logger.info(s"ShortUrl insert starts for hash=${shortUrl.hash} and url=${shortUrl.url}")
     db.run((tableQuery += shortUrl).transactionally).map { _ =>
       logger.info(s"ShortUrl insert succeeded for hash=${shortUrl.hash} and url=${shortUrl.url}")
       shortUrl
