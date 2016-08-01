@@ -3,7 +3,7 @@ package persistance.dao
 import javax.inject.Singleton
 
 import com.google.inject.Inject
-import models.Hash
+import models.{Hash, Url}
 import play.api.Logger
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfig}
 import slick.driver.JdbcProfile
@@ -33,7 +33,7 @@ class ShortUrlDAO @Inject() (dbConfigProvider: DatabaseConfigProvider) extends H
 
   private val logger = Logger(this.getClass)
 
-  def insert(shortUrl: EShortUrl)(implicit ex: ExecutionContext): Future[EShortUrl] = {
+  def insert(shortUrl: EShortUrl)(implicit ec: ExecutionContext): Future[EShortUrl] = {
     logger.info(s"ShortUrl insert starts for hash=${shortUrl.hash} and url=${shortUrl.url}")
     db.run((tableQuery += shortUrl).transactionally).map { _ =>
       logger.info(s"ShortUrl insert succeeded for hash=${shortUrl.hash} and url=${shortUrl.url}")
@@ -46,10 +46,18 @@ class ShortUrlDAO @Inject() (dbConfigProvider: DatabaseConfigProvider) extends H
     }
   }
 
-  def findByHash(hash: Hash)(implicit ex: ExecutionContext): Future[Option[EShortUrl]] = {
+  def findByHash(hash: Hash)(implicit ec: ExecutionContext): Future[Option[EShortUrl]] = {
     logger.info(s"ShortUrl findByHash starts for hash=${hash.hash}")
     val query = for {
       entity <- tableQuery if entity.hash === hash.hash
+    } yield entity
+    db.run(query.result.headOption)
+  }
+
+  def findByUrl(url: Url)(implicit ec: ExecutionContext): Future[Option[EShortUrl]] = {
+    logger.info(s"ShortUrl findByUrl starts for url=${url.url}")
+    val query = for {
+      entity <- tableQuery if entity.url === url.url
     } yield entity
     db.run(query.result.headOption)
   }
