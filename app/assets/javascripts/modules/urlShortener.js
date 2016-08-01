@@ -51,12 +51,12 @@ define([
             // post request to server
             $.ajax({
                 type: "POST",
-                url: "/shorten",
+                url: "/api/shorten",
                 contentType: "application/json",
                 async: true,
                 data: JSON.stringify(data)
             }).done(function(response) {
-                var currentUrlPrefix = window.location.href + "url/";
+                var currentUrlPrefix = window.location.href;
                 var hash = response.hash;
                 that._viewModel.urlInput("");
                 that._viewModel.canShowResult(true);

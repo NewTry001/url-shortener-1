@@ -14,5 +14,5 @@ GET         /assets/*file        controllers.Assets.versioned(path="/public", fi
 
 # URL shortener
 GET         /                    controllers.UrlController.index
-GET         /url/:hash           controllers.UrlController.redirect(hash)
-POST        /shorten             controllers.UrlController.shorten
+POST        /api/shorten         controllers.UrlController.shorten
+GET         /:hash               controllers.UrlController.redirect(hash)
