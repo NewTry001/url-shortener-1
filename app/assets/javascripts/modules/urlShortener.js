@@ -10,13 +10,13 @@ define([
     $,
     Backbone,
     ko,
-    urlShortener
+    urlShortenerTemplate
 ) {
     var TodoView = Backbone.View.extend({
         _viewModel: null,
 
         initialize: function() {
-            this._template = urlShortener;
+            this._template = urlShortenerTemplate;
             this._viewModel = this._initViewModel();
         },
 
@@ -25,12 +25,44 @@ define([
         },
 
         _initViewModel: function() {
+            var that = this;
 
-            function ToDoViewModel() {
-
+            function UrlShortenerViewModel() {
+                this.inputPlaceHolder = "Enter URL here";
+                this.urlInput = ko.observable("");
+                this.canShowResult = ko.observable(false);
+                this.fullUrl = ko.observable("");
+                this.shortUrl = ko.observable("");
+                this.shortenClick = function() {
+                  return that.submitUrl();
+                };
             }
 
-            return new ToDoViewModel();
+            return new UrlShortenerViewModel();
+        },
+
+        submitUrl: function() {
+            var that = this;
+            var url = this._viewModel.urlInput();
+            var data = {
+                url: url
+            };
+
+            // post request to server
+            $.ajax({
+                type: "POST",
+                url: "/shorten",
+                contentType: "application/json",
+                async: true,
+                data: JSON.stringify(data)
+            }).done(function(response) {
+                var currentUrlPrefix = window.location.href + "url/";
+                var hash = response.hash;
+                that._viewModel.urlInput("");
+                that._viewModel.canShowResult(true);
+                that._viewModel.fullUrl(url);
+                that._viewModel.shortUrl(currentUrlPrefix + hash);
+            });
         },
 
         _applyKnockoutBinding: function(thisView, thisViewModel, template) {
