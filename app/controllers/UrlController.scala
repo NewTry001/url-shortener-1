@@ -24,7 +24,7 @@ class UrlController @Inject() (urlService: UrlService) extends Controller {
   def redirect(hash: String): Action[AnyContent] = Action.async {
     val serverHash = urlService.toHash(hash)
     urlService.lookUp(serverHash) map {
-      case Some(fullUrl) => Redirect(fullUrl.url, 301)
+      case Some(fullUrl) => Redirect(fullUrl.withProtocol, 301)
       case None => NotFound("Bad hash")
     }
   }

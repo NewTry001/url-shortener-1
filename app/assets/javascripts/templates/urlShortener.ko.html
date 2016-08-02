@@ -1,26 +1,18 @@
-<span>Url shortener</span>
+<div class="title-container">
+    <h1>URL Shortener</h1>
+</div>
 
 <div class="url-input-holder">
-    <input class="url-input" data-bind="attr: { placeholder: inputPlaceHolder }, textInput: urlInput">
-
-    <div class="button" data-bind="click: shortenClick">
-        <button>Shorten</button>
-    </div>
+    <input class="url-input" data-bind="attr: { placeholder: inputPlaceHolder }, textInput: urlInput, disable: isInputDisabled">
+    <button data-bind="click: shortenClick, disable: isButtonDisabled">Shorten</button>
 </div>
 
 <div class="result" data-bind="visible: canShowResult">
     <div class="full-url">
-        <span>Input URL: </span>
         <span data-bind="text: fullUrl"></span>
     </div>
     <div class="short-url">
-        <span>Your URL is shortened to: </span>
-        <span data-bind="text: shortUrl"></span>
+        <span>&nbsp;was shortened to&nbsp;</span>
+        <a data-bind="attr: { href: shortUrl }, text: shortUrl"></a>
     </div>
-</div>
-
-<div class="footer">
-    <span>Developed by
-        <a href="https://github.com/tanghaoji" target="_blank">Haoji Tang</a>
-    </span>
 </div>

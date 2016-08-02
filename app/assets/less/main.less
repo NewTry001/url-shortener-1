@@ -1,3 +1,56 @@
-span {
-  font-size: 23px;
+span, a {
+  font-size: 19px;
+  text-decoration: none;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 60px;
+
+  span {
+    font-size: 15px;
+    color: #666;
+  }
+}
+
+.url-shortener-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+
+  div {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .url-input-holder {
+    display: flex;
+    flex-direction: row;
+    height: 34px;
+    margin-top: 4px;
+    box-shadow: 0 5px 30px #ccc;
+
+    input {
+      width: 550px;
+      padding-left: 6px;
+      margin: 0;
+      border: none;
+      outline: none;
+    }
+  }
+
+  .result {
+    display: flex;
+    flex-direction: row;
+    margin-top: 13px;
+
+    .full-url {
+      max-width: 250px;
+      overflow-x: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 }
