@@ -2,7 +2,7 @@
 Tags: Scala, Play Framework, Slick, play-slick, Backbone, jQuery, Knockout
 ![url-shortener](http://tanghaoji.github.io/images/url-shortener.png)
 ##Description:
-A sameple project to demonstrate how to integrate Play Framework with Slick3 and PostgreSQL, and front-end framework
+A sample project to demonstrate how to create RESTful API using Play Framework combined with external WebService, Slick3 repository, PostgreSQL database, and front-end framework
 
 ##Versions:
 play 2.5.4, play-slick 2.0.0, scala 2.11.7, PostgreSQL 9.5.3
@@ -30,4 +30,4 @@ play 2.5.4, play-slick 2.0.0, scala 2.11.7, PostgreSQL 9.5.3
 _TODO_
 
 ##Project setup tips and tutorial:
-__Under construction__
+_Under construction_
