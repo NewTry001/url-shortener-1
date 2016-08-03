@@ -1,9 +1,0 @@
-A sameple project to demonstrate how to integrate Play Framework with Slick and Postgresql, and front-end framework
-
-Warning: This project is still under development. README will be updated.
-
-Tag: Scala, Play Framework, Slick, play-slick, Backbone, jQuery, Knockout
-
-Usage:
-- install Play and Postgres
-- activator run
